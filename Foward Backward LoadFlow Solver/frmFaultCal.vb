@@ -13,6 +13,14 @@ Public Class frmFaultCal
     Public Property passLineSequ As FileInfo
 
     Public Property passCalValue() As String
+
+    Public Property passSubVoltageR As Decimal
+    Public Property passSubVoltageI As Decimal
+
+    Public Property passSubFaultLvl As Decimal
+
+    Public Property passRundFac As Integer
+
     Private Sub ListView1_SelectedIndexChanged(sender As Object, e As EventArgs)
 
     End Sub
@@ -191,6 +199,72 @@ Public Class frmFaultCal
 
             Next
 
+            Dim DGSheet As ExcelWorksheet = package.Workbook.Worksheets.Item(3)
+
+            For n As Integer = 0 To listDG.Items.Count - 1
+                DGSheet.Cells(n + 2, 1).Value = listDG.Items(n).SubItems(0).Text
+                DGSheet.Cells(n + 2, 2).Value = listDG.Items(n).SubItems(1).Text
+                DGSheet.Cells(n + 2, 3).Value = listDG.Items(n).SubItems(2).Text
+                DGSheet.Cells(n + 2, 4).Value = listDG.Items(n).SubItems(3).Text
+                DGSheet.Cells(n + 2, 5).Value = listDG.Items(n).SubItems(4).Text
+                DGSheet.Cells(n + 2, 6).Value = listDG.Items(n).SubItems(5).Text
+                DGSheet.Cells(n + 2, 7).Value = listDG.Items(n).SubItems(6).Text
+                DGSheet.Cells(n + 2, 8).Value = listDG.Items(n).SubItems(7).Text
+                DGSheet.Cells(n + 2, 9).Value = listDG.Items(n).SubItems(8).Text
+                DGSheet.Cells(n + 2, 10).Value = listDG.Items(n).SubItems(9).Text
+                DGSheet.Cells(n + 2, 11).Value = listDG.Items(n).SubItems(10).Text
+            Next
+
+            Dim IIDGSheet As ExcelWorksheet = package.Workbook.Worksheets.Item(4)
+
+            For n As Integer = 0 To listIIDG.Items.Count - 1
+                IIDGSheet.Cells(n + 2, 1).Value = listIIDG.Items(n).SubItems(0).Text
+                IIDGSheet.Cells(n + 2, 2).Value = listIIDG.Items(n).SubItems(1).Text
+                IIDGSheet.Cells(n + 2, 3).Value = listIIDG.Items(n).SubItems(2).Text
+                IIDGSheet.Cells(n + 2, 4).Value = listIIDG.Items(n).SubItems(3).Text
+                IIDGSheet.Cells(n + 2, 5).Value = listIIDG.Items(n).SubItems(4).Text
+                IIDGSheet.Cells(n + 2, 6).Value = listIIDG.Items(n).SubItems(5).Text
+            Next
+
+            Dim PreFaultVoltSheet As ExcelWorksheet = package.Workbook.Worksheets.Item(5)
+
+            For n As Integer = 0 To listPreFaultVolt.Items.Count - 1
+                PreFaultVoltSheet.Cells(n + 2, 1).Value = listPreFaultVolt.Items(n).SubItems(0).Text
+                PreFaultVoltSheet.Cells(n + 2, 2).Value = listPreFaultVolt.Items(n).SubItems(1).Text
+                PreFaultVoltSheet.Cells(n + 2, 3).Value = listPreFaultVolt.Items(n).SubItems(2).Text
+                PreFaultVoltSheet.Cells(n + 2, 4).Value = listPreFaultVolt.Items(n).SubItems(3).Text
+                PreFaultVoltSheet.Cells(n + 2, 5).Value = listPreFaultVolt.Items(n).SubItems(4).Text
+                PreFaultVoltSheet.Cells(n + 2, 6).Value = listPreFaultVolt.Items(n).SubItems(5).Text
+                PreFaultVoltSheet.Cells(n + 2, 7).Value = listPreFaultVolt.Items(n).SubItems(6).Text
+                PreFaultVoltSheet.Cells(n + 2, 8).Value = listPreFaultVolt.Items(n).SubItems(7).Text
+            Next
+
+            Dim CalSettings As ExcelWorksheet = package.Workbook.Worksheets.Item(6)
+
+            CalSettings.Cells(2, 1).Value = txtVoltage_R.Text
+            CalSettings.Cells(2, 2).Value = txtVoltage_I.Text
+            CalSettings.Cells(2, 3).Value = txtsubFultLvl.Text
+            CalSettings.Cells(2, 4).Value = txtFaultBus.Text
+            CalSettings.Cells(2, 5).Value = txtfaultImpRE.Text
+            CalSettings.Cells(2, 6).Value = txtfaultImpIm.Text
+
+            If radbSymFault.Checked Then
+                CalSettings.Cells(2, 7).Value = "SYM"
+
+            ElseIf radbLLGFault.Checked Then
+                CalSettings.Cells(2, 7).Value = "LLG"
+
+            ElseIf radbLGFault.Checked Then
+                CalSettings.Cells(2, 7).Value = "LG"
+
+            ElseIf radbLLFault.Checked Then
+                CalSettings.Cells(2, 7).Value = "LL"
+
+            End If
+
+            CalSettings.Cells(2, 8).Value = txtBasePower.Text
+            CalSettings.Cells(2, 9).Value = txtBaseVoltage.Text
+            CalSettings.Cells(2, 10).Value = txtRoundFac.Text
 
 
             package.Save()
@@ -218,6 +292,11 @@ Public Class frmFaultCal
     End Sub
 
     Private Sub frmFaultCal_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        txtVoltage_R.Text = passSubVoltageR
+        txtVoltage_I.Text = passSubVoltageI
+        txtRoundFac.Text = passRundFac
+        txtsubFultLvl.Text = passSubFaultLvl
 
         Dim linecount As Integer = 0
         Using package = New ExcelPackage(passLineSequ)
@@ -838,4 +917,6 @@ Public Class frmFaultCal
         End Try
 
     End Sub
+
+
 End Class

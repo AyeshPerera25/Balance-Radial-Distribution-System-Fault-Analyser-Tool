@@ -1014,6 +1014,10 @@ Public Class frmMain
         Dim faultAny As New frmFaultCal
         faultAny.passNodeData = listEdges
         faultAny.passLoadData = listLoads
+        faultAny.passSubVoltageR = txtVoltage_R.Text
+        faultAny.passSubVoltageI = txtVoltage_I.Text
+        faultAny.passRundFac = txtRoundFactor.Text
+        faultAny.passSubFaultLvl = txtPower.Text
 
 
 
