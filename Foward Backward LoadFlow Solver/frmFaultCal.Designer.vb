@@ -170,17 +170,14 @@ Partial Class frmFaultCal
         Me.ColumnHeader25 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.Label33 = New System.Windows.Forms.Label()
         Me.tabIIDG = New System.Windows.Forms.TabPage()
-        Me.ListView2 = New System.Windows.Forms.ListView()
+        Me.listIIDG = New System.Windows.Forms.ListView()
         Me.ColumnHeader46 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader47 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader48 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader49 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader50 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader51 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader52 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader53 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader54 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.GroupBox10 = New System.Windows.Forms.GroupBox()
+        Me.btnIIDGUpdate = New System.Windows.Forms.Button()
+        Me.Label34 = New System.Windows.Forms.Label()
+        Me.TextBox5 = New System.Windows.Forms.TextBox()
         Me.Label32 = New System.Windows.Forms.Label()
         Me.Label47 = New System.Windows.Forms.Label()
         Me.Label50 = New System.Windows.Forms.Label()
@@ -230,6 +227,8 @@ Partial Class frmFaultCal
         Me.btnSave = New System.Windows.Forms.Button()
         Me.lstFaultLog = New System.Windows.Forms.ListBox()
         Me.Label39 = New System.Windows.Forms.Label()
+        Me.ColumnHeader43 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader55 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.btnTFUpdate.SuspendLayout()
         Me.tabLineImp.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -263,7 +262,7 @@ Partial Class frmFaultCal
         Me.btnTFUpdate.Location = New System.Drawing.Point(12, 46)
         Me.btnTFUpdate.Name = "btnTFUpdate"
         Me.btnTFUpdate.SelectedIndex = 0
-        Me.btnTFUpdate.Size = New System.Drawing.Size(1020, 528)
+        Me.btnTFUpdate.Size = New System.Drawing.Size(1020, 512)
         Me.btnTFUpdate.TabIndex = 0
         '
         'tabLineImp
@@ -274,7 +273,7 @@ Partial Class frmFaultCal
         Me.tabLineImp.Location = New System.Drawing.Point(4, 22)
         Me.tabLineImp.Name = "tabLineImp"
         Me.tabLineImp.Padding = New System.Windows.Forms.Padding(3)
-        Me.tabLineImp.Size = New System.Drawing.Size(1012, 502)
+        Me.tabLineImp.Size = New System.Drawing.Size(1012, 486)
         Me.tabLineImp.TabIndex = 0
         Me.tabLineImp.Text = "Line Impedance"
         Me.tabLineImp.UseVisualStyleBackColor = True
@@ -474,9 +473,9 @@ Partial Class frmFaultCal
         Me.listFaultImp.FullRowSelect = True
         Me.listFaultImp.GridLines = True
         Me.listFaultImp.HideSelection = False
-        Me.listFaultImp.Location = New System.Drawing.Point(6, 3)
+        Me.listFaultImp.Location = New System.Drawing.Point(6, 6)
         Me.listFaultImp.Name = "listFaultImp"
-        Me.listFaultImp.Size = New System.Drawing.Size(624, 493)
+        Me.listFaultImp.Size = New System.Drawing.Size(618, 474)
         Me.listFaultImp.Sorting = System.Windows.Forms.SortOrder.Ascending
         Me.listFaultImp.TabIndex = 7
         Me.listFaultImp.UseCompatibleStateImageBehavior = False
@@ -534,7 +533,7 @@ Partial Class frmFaultCal
         Me.tabTransform.Location = New System.Drawing.Point(4, 22)
         Me.tabTransform.Name = "tabTransform"
         Me.tabTransform.Padding = New System.Windows.Forms.Padding(3)
-        Me.tabTransform.Size = New System.Drawing.Size(1012, 502)
+        Me.tabTransform.Size = New System.Drawing.Size(1012, 486)
         Me.tabTransform.TabIndex = 5
         Me.tabTransform.Text = "Transformer"
         Me.tabTransform.UseVisualStyleBackColor = True
@@ -812,9 +811,9 @@ Partial Class frmFaultCal
         Me.listTransformer.FullRowSelect = True
         Me.listTransformer.GridLines = True
         Me.listTransformer.HideSelection = False
-        Me.listTransformer.Location = New System.Drawing.Point(0, 0)
+        Me.listTransformer.Location = New System.Drawing.Point(3, 6)
         Me.listTransformer.Name = "listTransformer"
-        Me.listTransformer.Size = New System.Drawing.Size(624, 502)
+        Me.listTransformer.Size = New System.Drawing.Size(618, 474)
         Me.listTransformer.Sorting = System.Windows.Forms.SortOrder.Ascending
         Me.listTransformer.TabIndex = 8
         Me.listTransformer.UseCompatibleStateImageBehavior = False
@@ -887,7 +886,7 @@ Partial Class frmFaultCal
         Me.tabLoad.Location = New System.Drawing.Point(4, 22)
         Me.tabLoad.Name = "tabLoad"
         Me.tabLoad.Padding = New System.Windows.Forms.Padding(3)
-        Me.tabLoad.Size = New System.Drawing.Size(1012, 502)
+        Me.tabLoad.Size = New System.Drawing.Size(1012, 486)
         Me.tabLoad.TabIndex = 2
         Me.tabLoad.Text = "Loads"
         Me.tabLoad.UseVisualStyleBackColor = True
@@ -1015,6 +1014,7 @@ Partial Class frmFaultCal
         'radLodRICLd
         '
         Me.radLodRICLd.AutoSize = True
+        Me.radLodRICLd.BackColor = System.Drawing.Color.Orchid
         Me.radLodRICLd.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.radLodRICLd.Location = New System.Drawing.Point(175, 22)
         Me.radLodRICLd.Name = "radLodRICLd"
@@ -1022,11 +1022,12 @@ Partial Class frmFaultCal
         Me.radLodRICLd.TabIndex = 1
         Me.radLodRICLd.TabStop = True
         Me.radLodRICLd.Text = "RIC Load"
-        Me.radLodRICLd.UseVisualStyleBackColor = True
+        Me.radLodRICLd.UseVisualStyleBackColor = False
         '
         'radLodMotorLd
         '
         Me.radLodMotorLd.AutoSize = True
+        Me.radLodMotorLd.BackColor = System.Drawing.Color.DarkTurquoise
         Me.radLodMotorLd.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.radLodMotorLd.Location = New System.Drawing.Point(36, 22)
         Me.radLodMotorLd.Name = "radLodMotorLd"
@@ -1034,7 +1035,7 @@ Partial Class frmFaultCal
         Me.radLodMotorLd.TabIndex = 0
         Me.radLodMotorLd.TabStop = True
         Me.radLodMotorLd.Text = "Motor Load"
-        Me.radLodMotorLd.UseVisualStyleBackColor = True
+        Me.radLodMotorLd.UseVisualStyleBackColor = False
         '
         'lblGround
         '
@@ -1199,9 +1200,9 @@ Partial Class frmFaultCal
         Me.listLoad.FullRowSelect = True
         Me.listLoad.GridLines = True
         Me.listLoad.HideSelection = False
-        Me.listLoad.Location = New System.Drawing.Point(0, 3)
+        Me.listLoad.Location = New System.Drawing.Point(2, 6)
         Me.listLoad.Name = "listLoad"
-        Me.listLoad.Size = New System.Drawing.Size(624, 502)
+        Me.listLoad.Size = New System.Drawing.Size(618, 474)
         Me.listLoad.Sorting = System.Windows.Forms.SortOrder.Ascending
         Me.listLoad.TabIndex = 9
         Me.listLoad.UseCompatibleStateImageBehavior = False
@@ -1275,7 +1276,7 @@ Partial Class frmFaultCal
         Me.tabDG.Location = New System.Drawing.Point(4, 22)
         Me.tabDG.Name = "tabDG"
         Me.tabDG.Padding = New System.Windows.Forms.Padding(3)
-        Me.tabDG.Size = New System.Drawing.Size(1012, 502)
+        Me.tabDG.Size = New System.Drawing.Size(1012, 486)
         Me.tabDG.TabIndex = 1
         Me.tabDG.Text = "DG "
         Me.tabDG.UseVisualStyleBackColor = True
@@ -1327,25 +1328,27 @@ Partial Class frmFaultCal
         'radbTurnIIDG
         '
         Me.radbTurnIIDG.AutoSize = True
+        Me.radbTurnIIDG.BackColor = System.Drawing.Color.GreenYellow
         Me.radbTurnIIDG.Location = New System.Drawing.Point(152, 26)
         Me.radbTurnIIDG.Name = "radbTurnIIDG"
-        Me.radbTurnIIDG.Size = New System.Drawing.Size(104, 23)
+        Me.radbTurnIIDG.Size = New System.Drawing.Size(121, 23)
         Me.radbTurnIIDG.TabIndex = 1
         Me.radbTurnIIDG.TabStop = True
-        Me.radbTurnIIDG.Text = "Turn to IIDG"
-        Me.radbTurnIIDG.UseVisualStyleBackColor = True
+        Me.radbTurnIIDG.Text = "Turn to IIDG ->"
+        Me.radbTurnIIDG.UseVisualStyleBackColor = False
         Me.radbTurnIIDG.UseWaitCursor = True
         '
         'radbDG
         '
         Me.radbDG.AutoSize = True
+        Me.radbDG.BackColor = System.Drawing.SystemColors.Control
         Me.radbDG.Location = New System.Drawing.Point(54, 26)
         Me.radbDG.Name = "radbDG"
         Me.radbDG.Size = New System.Drawing.Size(47, 23)
         Me.radbDG.TabIndex = 0
         Me.radbDG.TabStop = True
         Me.radbDG.Text = "DG"
-        Me.radbDG.UseVisualStyleBackColor = True
+        Me.radbDG.UseVisualStyleBackColor = False
         Me.radbDG.UseWaitCursor = True
         '
         'Label52
@@ -1536,9 +1539,9 @@ Partial Class frmFaultCal
         Me.listDG.FullRowSelect = True
         Me.listDG.GridLines = True
         Me.listDG.HideSelection = False
-        Me.listDG.Location = New System.Drawing.Point(0, 3)
+        Me.listDG.Location = New System.Drawing.Point(3, 6)
         Me.listDG.Name = "listDG"
-        Me.listDG.Size = New System.Drawing.Size(624, 496)
+        Me.listDG.Size = New System.Drawing.Size(618, 474)
         Me.listDG.Sorting = System.Windows.Forms.SortOrder.Ascending
         Me.listDG.TabIndex = 9
         Me.listDG.UseCompatibleStateImageBehavior = False
@@ -1611,30 +1614,30 @@ Partial Class frmFaultCal
         '
         'tabIIDG
         '
-        Me.tabIIDG.Controls.Add(Me.ListView2)
+        Me.tabIIDG.Controls.Add(Me.listIIDG)
         Me.tabIIDG.Controls.Add(Me.GroupBox10)
         Me.tabIIDG.Location = New System.Drawing.Point(4, 22)
         Me.tabIIDG.Name = "tabIIDG"
         Me.tabIIDG.Padding = New System.Windows.Forms.Padding(3)
-        Me.tabIIDG.Size = New System.Drawing.Size(1012, 502)
+        Me.tabIIDG.Size = New System.Drawing.Size(1012, 486)
         Me.tabIIDG.TabIndex = 6
         Me.tabIIDG.Text = "IIDG"
         Me.tabIIDG.UseVisualStyleBackColor = True
         '
-        'ListView2
+        'listIIDG
         '
-        Me.ListView2.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader46, Me.ColumnHeader47, Me.ColumnHeader48, Me.ColumnHeader49, Me.ColumnHeader50, Me.ColumnHeader51, Me.ColumnHeader52, Me.ColumnHeader53, Me.ColumnHeader54})
-        Me.ListView2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ListView2.FullRowSelect = True
-        Me.ListView2.GridLines = True
-        Me.ListView2.HideSelection = False
-        Me.ListView2.Location = New System.Drawing.Point(3, 6)
-        Me.ListView2.Name = "ListView2"
-        Me.ListView2.Size = New System.Drawing.Size(624, 493)
-        Me.ListView2.Sorting = System.Windows.Forms.SortOrder.Ascending
-        Me.ListView2.TabIndex = 8
-        Me.ListView2.UseCompatibleStateImageBehavior = False
-        Me.ListView2.View = System.Windows.Forms.View.Details
+        Me.listIIDG.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader46, Me.ColumnHeader47, Me.ColumnHeader48, Me.ColumnHeader43, Me.ColumnHeader55})
+        Me.listIIDG.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.listIIDG.FullRowSelect = True
+        Me.listIIDG.GridLines = True
+        Me.listIIDG.HideSelection = False
+        Me.listIIDG.Location = New System.Drawing.Point(4, 6)
+        Me.listIIDG.Name = "listIIDG"
+        Me.listIIDG.Size = New System.Drawing.Size(618, 474)
+        Me.listIIDG.Sorting = System.Windows.Forms.SortOrder.Ascending
+        Me.listIIDG.TabIndex = 8
+        Me.listIIDG.UseCompatibleStateImageBehavior = False
+        Me.listIIDG.View = System.Windows.Forms.View.Details
         '
         'ColumnHeader46
         '
@@ -1643,47 +1646,20 @@ Partial Class frmFaultCal
         '
         'ColumnHeader47
         '
-        Me.ColumnHeader47.Text = "Start"
-        Me.ColumnHeader47.Width = 40
+        Me.ColumnHeader47.Text = "Connected Node"
+        Me.ColumnHeader47.Width = 96
         '
         'ColumnHeader48
         '
-        Me.ColumnHeader48.Text = "End"
-        Me.ColumnHeader48.Width = 40
-        '
-        'ColumnHeader49
-        '
-        Me.ColumnHeader49.Text = "Positive Seq Impedance (Re)"
-        Me.ColumnHeader49.Width = 150
-        '
-        'ColumnHeader50
-        '
-        Me.ColumnHeader50.Text = "Positive Seq Impedance (Im)"
-        Me.ColumnHeader50.Width = 150
-        '
-        'ColumnHeader51
-        '
-        Me.ColumnHeader51.Text = "Negative Seq Impedance (Re)"
-        Me.ColumnHeader51.Width = 160
-        '
-        'ColumnHeader52
-        '
-        Me.ColumnHeader52.Text = "Negative Seq Impedance (Im)"
-        Me.ColumnHeader52.Width = 160
-        '
-        'ColumnHeader53
-        '
-        Me.ColumnHeader53.Text = "Zero Seq Impedance (Re)"
-        Me.ColumnHeader53.Width = 140
-        '
-        'ColumnHeader54
-        '
-        Me.ColumnHeader54.Text = "Zero Seq Impedance (Im)"
-        Me.ColumnHeader54.Width = 140
+        Me.ColumnHeader48.Text = "Active Power Output"
+        Me.ColumnHeader48.Width = 113
         '
         'GroupBox10
         '
         Me.GroupBox10.BackColor = System.Drawing.SystemColors.Control
+        Me.GroupBox10.Controls.Add(Me.btnIIDGUpdate)
+        Me.GroupBox10.Controls.Add(Me.Label34)
+        Me.GroupBox10.Controls.Add(Me.TextBox5)
         Me.GroupBox10.Controls.Add(Me.Label32)
         Me.GroupBox10.Controls.Add(Me.Label47)
         Me.GroupBox10.Controls.Add(Me.Label50)
@@ -1700,6 +1676,35 @@ Partial Class frmFaultCal
         Me.GroupBox10.TabIndex = 0
         Me.GroupBox10.TabStop = False
         Me.GroupBox10.Text = "Inverter Interface Distributed Generator"
+        '
+        'btnIIDGUpdate
+        '
+        Me.btnIIDGUpdate.BackColor = System.Drawing.SystemColors.ControlLight
+        Me.btnIIDGUpdate.Location = New System.Drawing.Point(171, 410)
+        Me.btnIIDGUpdate.Name = "btnIIDGUpdate"
+        Me.btnIIDGUpdate.Size = New System.Drawing.Size(139, 27)
+        Me.btnIIDGUpdate.TabIndex = 110
+        Me.btnIIDGUpdate.Text = "Update"
+        Me.btnIIDGUpdate.UseVisualStyleBackColor = False
+        '
+        'Label34
+        '
+        Me.Label34.AutoSize = True
+        Me.Label34.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.Label34.Location = New System.Drawing.Point(48, 179)
+        Me.Label34.Name = "Label34"
+        Me.Label34.Size = New System.Drawing.Size(73, 13)
+        Me.Label34.TabIndex = 109
+        Me.Label34.Text = "Rated Current"
+        '
+        'TextBox5
+        '
+        Me.TextBox5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.TextBox5.Location = New System.Drawing.Point(171, 58)
+        Me.TextBox5.Name = "TextBox5"
+        Me.TextBox5.Size = New System.Drawing.Size(86, 20)
+        Me.TextBox5.TabIndex = 108
+        Me.TextBox5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'Label32
         '
@@ -1727,9 +1732,9 @@ Partial Class frmFaultCal
         Me.Label50.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.Label50.Location = New System.Drawing.Point(48, 143)
         Me.Label50.Name = "Label50"
-        Me.Label50.Size = New System.Drawing.Size(57, 13)
+        Me.Label50.Size = New System.Drawing.Size(90, 13)
         Me.Label50.TabIndex = 104
-        Me.Label50.Text = "Power Out"
+        Me.Label50.Text = "Active Power Out"
         '
         'Label61
         '
@@ -1737,9 +1742,9 @@ Partial Class frmFaultCal
         Me.Label61.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.Label61.Location = New System.Drawing.Point(276, 179)
         Me.Label61.Name = "Label61"
-        Me.Label61.Size = New System.Drawing.Size(27, 13)
+        Me.Label61.Size = New System.Drawing.Size(14, 13)
         Me.Label61.TabIndex = 99
-        Me.Label61.Text = "kVA"
+        Me.Label61.Text = "A"
         '
         'TextBox2
         '
@@ -1765,9 +1770,9 @@ Partial Class frmFaultCal
         Me.Label51.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.Label51.Location = New System.Drawing.Point(276, 217)
         Me.Label51.Name = "Label51"
-        Me.Label51.Size = New System.Drawing.Size(27, 13)
+        Me.Label51.Size = New System.Drawing.Size(14, 13)
         Me.Label51.TabIndex = 102
-        Me.Label51.Text = "kVA"
+        Me.Label51.Text = "A"
         '
         'TextBox3
         '
@@ -1820,7 +1825,7 @@ Partial Class frmFaultCal
         Me.tabFaultCalSet.Location = New System.Drawing.Point(4, 22)
         Me.tabFaultCalSet.Name = "tabFaultCalSet"
         Me.tabFaultCalSet.Padding = New System.Windows.Forms.Padding(3)
-        Me.tabFaultCalSet.Size = New System.Drawing.Size(1012, 502)
+        Me.tabFaultCalSet.Size = New System.Drawing.Size(1012, 486)
         Me.tabFaultCalSet.TabIndex = 3
         Me.tabFaultCalSet.Text = "Calculation Settings"
         Me.tabFaultCalSet.UseVisualStyleBackColor = True
@@ -1829,7 +1834,7 @@ Partial Class frmFaultCal
         '
         Me.GroupBox7.Controls.Add(Me.panFaultViewer)
         Me.GroupBox7.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox7.Location = New System.Drawing.Point(570, 6)
+        Me.GroupBox7.Location = New System.Drawing.Point(580, 5)
         Me.GroupBox7.Name = "GroupBox7"
         Me.GroupBox7.Size = New System.Drawing.Size(425, 475)
         Me.GroupBox7.TabIndex = 121
@@ -1852,7 +1857,7 @@ Partial Class frmFaultCal
         Me.faultViwer.BackwardEnabled = False
         Me.faultViwer.ForwardEnabled = False
         Me.faultViwer.Graph = Nothing
-        Me.faultViwer.Location = New System.Drawing.Point(3, 2)
+        Me.faultViwer.Location = New System.Drawing.Point(4, 3)
         Me.faultViwer.MouseHitDistance = 0.05R
         Me.faultViwer.Name = "faultViwer"
         Me.faultViwer.NavigationVisible = True
@@ -2029,7 +2034,7 @@ Partial Class frmFaultCal
         Me.txtLowerLimit.Name = "txtLowerLimit"
         Me.txtLowerLimit.Size = New System.Drawing.Size(95, 20)
         Me.txtLowerLimit.TabIndex = 101
-        Me.txtLowerLimit.Text = "0.05"
+        Me.txtLowerLimit.Text = "0"
         Me.txtLowerLimit.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'Label14
@@ -2048,7 +2053,7 @@ Partial Class frmFaultCal
         Me.txtUpperLimit.Name = "txtUpperLimit"
         Me.txtUpperLimit.Size = New System.Drawing.Size(95, 20)
         Me.txtUpperLimit.TabIndex = 99
-        Me.txtUpperLimit.Text = "0.05"
+        Me.txtUpperLimit.Text = "0"
         Me.txtUpperLimit.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'Label15
@@ -2158,7 +2163,7 @@ Partial Class frmFaultCal
         Me.tabFaultOut.Location = New System.Drawing.Point(4, 22)
         Me.tabFaultOut.Name = "tabFaultOut"
         Me.tabFaultOut.Padding = New System.Windows.Forms.Padding(3)
-        Me.tabFaultOut.Size = New System.Drawing.Size(1012, 502)
+        Me.tabFaultOut.Size = New System.Drawing.Size(1012, 486)
         Me.tabFaultOut.TabIndex = 4
         Me.tabFaultOut.Text = "Output"
         Me.tabFaultOut.UseVisualStyleBackColor = True
@@ -2207,6 +2212,16 @@ Partial Class frmFaultCal
         Me.Label39.Size = New System.Drawing.Size(127, 13)
         Me.Label39.TabIndex = 5
         Me.Label39.Text = "Fault Calculation Log"
+        '
+        'ColumnHeader43
+        '
+        Me.ColumnHeader43.Text = "Rated Current"
+        Me.ColumnHeader43.Width = 147
+        '
+        'ColumnHeader55
+        '
+        Me.ColumnHeader55.Text = "Maximum Current"
+        Me.ColumnHeader55.Width = 158
         '
         'frmFaultCal
         '
@@ -2453,17 +2468,16 @@ Partial Class frmFaultCal
     Friend WithEvents Label51 As Label
     Friend WithEvents TextBox3 As TextBox
     Friend WithEvents Label60 As Label
-    Friend WithEvents ListView2 As ListView
+    Friend WithEvents listIIDG As ListView
     Friend WithEvents ColumnHeader46 As ColumnHeader
     Friend WithEvents ColumnHeader47 As ColumnHeader
     Friend WithEvents ColumnHeader48 As ColumnHeader
-    Friend WithEvents ColumnHeader49 As ColumnHeader
-    Friend WithEvents ColumnHeader50 As ColumnHeader
-    Friend WithEvents ColumnHeader51 As ColumnHeader
-    Friend WithEvents ColumnHeader52 As ColumnHeader
-    Friend WithEvents ColumnHeader53 As ColumnHeader
-    Friend WithEvents ColumnHeader54 As ColumnHeader
     Friend WithEvents GroupBox11 As GroupBox
     Friend WithEvents radbTurnIIDG As RadioButton
     Friend WithEvents radbDG As RadioButton
+    Friend WithEvents Label34 As Label
+    Friend WithEvents TextBox5 As TextBox
+    Friend WithEvents btnIIDGUpdate As Button
+    Friend WithEvents ColumnHeader43 As ColumnHeader
+    Friend WithEvents ColumnHeader55 As ColumnHeader
 End Class

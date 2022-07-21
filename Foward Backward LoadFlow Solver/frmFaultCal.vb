@@ -78,7 +78,7 @@ Public Class frmFaultCal
             ElseIf passLoadData.Items(n).SubItems(3).Text = "Shunt Capacitor" Then
                 loadName = "SC #" + passLoadData.Items(n).SubItems(0).Text
             Else
-                loadName = "DG #" + passLoadData.Items(n).SubItems(0).Text
+                Continue For
             End If
 
             graph.AddEdge(passLoadData.Items(n).SubItems(1).Text, loadName)
@@ -94,6 +94,30 @@ Public Class frmFaultCal
                 node_1.Attr.Fillcolor = Microsoft.Glee.Drawing.Color.Red
                 node_1.Attr.Shape = Microsoft.Glee.Drawing.Shape.Octagon
             End If
+        Next
+
+
+        For n As Integer = 0 To listDG.Items.Count - 1
+
+            If listDG.Items(n).SubItems(10).Text = "DG" Then
+                loadName = "DG#" + listDG.Items(n).SubItems(0).Text
+
+            ElseIf listDG.Items(n).SubItems(10).Text = "IIDG" Then
+                loadName = "IIDG#" + listDG.Items(n).SubItems(0).Text
+            End If
+
+            graph.AddEdge(listDG.Items(n).SubItems(1).Text, loadName)
+            node_1 = graph.FindNode(loadName)
+
+            If listDG.Items(n).SubItems(10).Text = "DG" Then
+                node_1.Attr.Fillcolor = Microsoft.Glee.Drawing.Color.Red
+                node_1.Attr.Shape = Microsoft.Glee.Drawing.Shape.Octagon
+            ElseIf listDG.Items(n).SubItems(10).Text = "IIDG" Then
+                node_1.Attr.Fillcolor = Microsoft.Glee.Drawing.Color.GreenYellow
+                node_1.Attr.Shape = Microsoft.Glee.Drawing.Shape.Octagon
+
+            End If
+
         Next
 
         faultViwer.Graph = graph
@@ -266,9 +290,13 @@ Public Class frmFaultCal
 
                     listLoad.Items(loadCount).SubItems.Add(" ")
 
+
+
                     loadCount += 1
                 Else
-                    listDG.Items.Add(Convert.ToString(n - linecount + 1), n - loadCount)
+                    Dim DGcount As Integer = listDG.Items.Count
+
+                    listDG.Items.Add(Convert.ToString(DGcount + 1), DGcount)
                     listDG.Items(n - loadCount).SubItems.Add(passLoadData.Items(n).SubItems(1).Text)
                     listDG.Items(n - loadCount).SubItems.Add(" ")
                     listDG.Items(n - loadCount).SubItems.Add(" ")
@@ -446,6 +474,7 @@ Public Class frmFaultCal
     End Sub
 
     Private Sub listLoad_SelectedIndexChanged(sender As Object, e As EventArgs) Handles listLoad.SelectedIndexChanged
+
         If listLoad.SelectedItems.Count > 0 Then
 
             txtLodConectNod.Text = listLoad.SelectedItems(0).SubItems(1).Text
@@ -551,9 +580,11 @@ Public Class frmFaultCal
 
             If radLodMotorLd.Checked Then
                 listLoad.SelectedItems(0).SubItems(11).Text = "Motor"
+                listLoad.SelectedItems(0).BackColor = Color.DarkTurquoise
 
             ElseIf radLodRICLd.Checked Then
                 listLoad.SelectedItems(0).SubItems(11).Text = "RIC"
+                listLoad.SelectedItems(0).BackColor = Color.Orchid
 
             End If
 
@@ -563,25 +594,11 @@ Public Class frmFaultCal
         End Try
     End Sub
 
-    Private Sub TextBox31_TextChanged(sender As Object, e As EventArgs) Handles txtDGGndSqIm.TextChanged
 
-    End Sub
-
-    Private Sub Label32_Click(sender As Object, e As EventArgs) Handles Label32.Click
-
-    End Sub
-
-    Private Sub TextBox5_TextChanged(sender As Object, e As EventArgs)
-
-    End Sub
-
-    Private Sub GroupBox11_Enter(sender As Object, e As EventArgs) Handles GroupBox11.Enter
-
-    End Sub
 
     Private Sub radbDG_CheckedChanged(sender As Object, e As EventArgs) Handles radbDG.CheckedChanged
         If radbDG.Checked Then
-            radbTurnIIDG.Checked = False
+            'radbTurnIIDG.Checked = False
             txtDGPosSqRe.Enabled = True
             txtDGPosSqIm.Enabled = True
             txtDGNegSqRe.Enabled = True
@@ -594,8 +611,9 @@ Public Class frmFaultCal
     End Sub
 
     Private Sub radbTurnIIDG_CheckedChanged(sender As Object, e As EventArgs) Handles radbTurnIIDG.CheckedChanged
+
         If radbTurnIIDG.Checked Then
-            radbDG.Checked = False
+            'radbDG.Checked = False
             txtDGPosSqRe.Enabled = False
             txtDGPosSqIm.Enabled = False
             txtDGNegSqRe.Enabled = False
@@ -606,5 +624,124 @@ Public Class frmFaultCal
             txtDGGndSqIm.Enabled = False
         End If
 
+    End Sub
+
+    Private Sub listDG_SelectedIndexChanged(sender As Object, e As EventArgs) Handles listDG.SelectedIndexChanged
+
+        If listDG.SelectedItems.Count > 0 Then
+
+            txtDGConnctNode.Text = listDG.SelectedItems(0).SubItems(1).Text
+
+            If listDG.SelectedItems(0).SubItems(10).Text = "DG" Then
+
+                radbDG.Checked = True
+                radbTurnIIDG.Checked = False
+
+            ElseIf listDG.SelectedItems(0).SubItems(10).Text = "IIDG" Then
+
+                radbDG.Checked = False
+                radbTurnIIDG.Checked = True
+
+            Else
+
+                radbDG.Checked = False
+                radbTurnIIDG.Checked = False
+
+            End If
+
+            txtDGPosSqRe.Text = listDG.SelectedItems(0).SubItems(2).Text
+            txtDGPosSqIm.Text = listDG.SelectedItems(0).SubItems(3).Text
+            txtDGNegSqRe.Text = listDG.SelectedItems(0).SubItems(4).Text
+            txtDGNegSqIm.Text = listDG.SelectedItems(0).SubItems(5).Text
+            txtDGZeroSqRe.Text = listDG.SelectedItems(0).SubItems(6).Text
+            txtDGZeroSqIm.Text = listDG.SelectedItems(0).SubItems(7).Text
+            txtDGGndSqRe.Text = listDG.SelectedItems(0).SubItems(8).Text
+            txtDGGndSqIm.Text = listDG.SelectedItems(0).SubItems(9).Text
+
+
+        End If
+
+    End Sub
+
+    Private Sub btnDG_Click(sender As Object, e As EventArgs) Handles btnDG.Click
+
+        Try
+
+            If radbDG.Checked Then
+
+                If listDG.SelectedItems(0).SubItems(10).Text = "IIDG" Then
+
+                    For Each listItem As ListViewItem In listIIDG.Items
+
+                        If listItem.SubItems(1).Text = Convert.ToString(txtDGConnctNode.Text) Then
+
+                            listItem.Remove()
+                        End If
+
+
+                    Next
+
+                    listDG.SelectedItems(0).SubItems(2).Text = Convert.ToDecimal(txtDGPosSqRe.Text)
+                    listDG.SelectedItems(0).SubItems(3).Text = Convert.ToDecimal(txtDGPosSqIm.Text)
+                    listDG.SelectedItems(0).SubItems(4).Text = Convert.ToDecimal(txtDGNegSqRe.Text)
+                    listDG.SelectedItems(0).SubItems(5).Text = Convert.ToDecimal(txtDGNegSqIm.Text)
+                    listDG.SelectedItems(0).SubItems(6).Text = Convert.ToDecimal(txtDGZeroSqRe.Text)
+                    listDG.SelectedItems(0).SubItems(7).Text = Convert.ToDecimal(txtDGZeroSqIm.Text)
+                    listDG.SelectedItems(0).SubItems(8).Text = Convert.ToDecimal(txtDGGndSqRe.Text)
+                    listDG.SelectedItems(0).SubItems(9).Text = Convert.ToDecimal(txtDGGndSqIm.Text)
+                    listDG.SelectedItems(0).SubItems(10).Text = "DG"
+                    listDG.SelectedItems(0).BackColor = Color.White
+
+
+
+                Else
+
+                    listDG.SelectedItems(0).SubItems(2).Text = Convert.ToDecimal(txtDGPosSqRe.Text)
+                    listDG.SelectedItems(0).SubItems(3).Text = Convert.ToDecimal(txtDGPosSqIm.Text)
+                    listDG.SelectedItems(0).SubItems(4).Text = Convert.ToDecimal(txtDGNegSqRe.Text)
+                    listDG.SelectedItems(0).SubItems(5).Text = Convert.ToDecimal(txtDGNegSqIm.Text)
+                    listDG.SelectedItems(0).SubItems(6).Text = Convert.ToDecimal(txtDGZeroSqRe.Text)
+                    listDG.SelectedItems(0).SubItems(7).Text = Convert.ToDecimal(txtDGZeroSqIm.Text)
+                    listDG.SelectedItems(0).SubItems(8).Text = Convert.ToDecimal(txtDGGndSqRe.Text)
+                    listDG.SelectedItems(0).SubItems(9).Text = Convert.ToDecimal(txtDGGndSqIm.Text)
+                    listDG.SelectedItems(0).SubItems(10).Text = "DG"
+
+
+
+                End If
+
+
+
+            ElseIf radbTurnIIDG.Checked And listDG.SelectedItems(0).SubItems(10).Text = "DG" Then
+
+                    Dim IIDGCount As Integer = listIIDG.Items.Count
+
+                listIIDG.Items.Add(Convert.ToString(IIDGCount + 1), IIDGCount)
+                listIIDG.Items(IIDGCount).SubItems.Add(Convert.ToString(txtDGConnctNode.Text))
+                listDG.SelectedItems(0).SubItems(10).Text = "IIDG"
+                listDG.SelectedItems(0).BackColor = Color.GreenYellow
+                listDG.SelectedItems(0).SubItems(2).Text = "->"
+                listDG.SelectedItems(0).SubItems(3).Text = "->"
+                listDG.SelectedItems(0).SubItems(4).Text = "->"
+                listDG.SelectedItems(0).SubItems(5).Text = "->"
+                listDG.SelectedItems(0).SubItems(6).Text = "->"
+                listDG.SelectedItems(0).SubItems(7).Text = "->"
+                listDG.SelectedItems(0).SubItems(8).Text = "->"
+                listDG.SelectedItems(0).SubItems(9).Text = "->"
+
+
+
+
+
+
+
+            End If
+
+            createFaultGraph()
+
+        Catch ex As Exception
+            MsgBox("Enter Numbers Only")
+
+        End Try
     End Sub
 End Class
