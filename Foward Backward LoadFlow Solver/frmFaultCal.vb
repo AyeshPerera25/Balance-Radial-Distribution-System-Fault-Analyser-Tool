@@ -225,6 +225,7 @@ Public Class frmFaultCal
             package.LicenseContext = LicenseContext.NonCommercial
 
             Dim lineSequImp As ExcelWorksheet = package.Workbook.Worksheets.Item(5)
+            Dim preFaultVolt As ExcelWorksheet = package.Workbook.Worksheets.Item(7)
 
             For n As Integer = 0 To passNodeData.Items.Count - 1
 
@@ -258,6 +259,19 @@ Public Class frmFaultCal
 
                 End If
 
+
+            Next
+            Dim buscount As Integer = 0
+            For n As Integer = 0 To Convert.ToInt32(preFaultVolt.Cells(1, 8).Value)
+                listPreFaultVolt.Items.Add(preFaultVolt.Cells(n + 2, 1).Value, buscount)
+                listPreFaultVolt.Items(buscount).SubItems.Add(Convert.ToString(preFaultVolt.Cells(n + 2, 1).Value))
+                listPreFaultVolt.Items(buscount).SubItems.Add(Convert.ToString(preFaultVolt.Cells(n + 2, 2).Value))
+                listPreFaultVolt.Items(buscount).SubItems.Add(Convert.ToString(preFaultVolt.Cells(n + 2, 3).Value))
+                listPreFaultVolt.Items(buscount).SubItems.Add(Convert.ToString(preFaultVolt.Cells(n + 2, 4).Value))
+                listPreFaultVolt.Items(buscount).SubItems.Add(Convert.ToString(preFaultVolt.Cells(n + 2, 5).Value))
+                listPreFaultVolt.Items(buscount).SubItems.Add(Convert.ToString(preFaultVolt.Cells(n + 2, 6).Value))
+                listPreFaultVolt.Items(buscount).SubItems.Add(Convert.ToString(preFaultVolt.Cells(n + 2, 7).Value))
+                buscount += 1
 
             Next
 
@@ -530,9 +544,6 @@ Public Class frmFaultCal
             txtLodGndImpRe.Text = listLoad.SelectedItems(0).SubItems(8).Text
             txtLodGndImpIm.Text = listLoad.SelectedItems(0).SubItems(9).Text
 
-
-
-
         End If
     End Sub
 
@@ -561,7 +572,6 @@ Public Class frmFaultCal
 
             Else
                 listLoad.SelectedItems(0).SubItems(9).Text = txtLodGndImpIm.Text
-
 
             End If
 
@@ -718,6 +728,10 @@ Public Class frmFaultCal
 
                 listIIDG.Items.Add(Convert.ToString(IIDGCount + 1), IIDGCount)
                 listIIDG.Items(IIDGCount).SubItems.Add(Convert.ToString(txtDGConnctNode.Text))
+                listIIDG.Items(IIDGCount).SubItems.Add("")
+                listIIDG.Items(IIDGCount).SubItems.Add("")
+                listIIDG.Items(IIDGCount).SubItems.Add("")
+                listIIDG.Items(IIDGCount).SubItems.Add("")
                 listDG.SelectedItems(0).SubItems(10).Text = "IIDG"
                 listDG.SelectedItems(0).BackColor = Color.GreenYellow
                 listDG.SelectedItems(0).SubItems(2).Text = "->"
@@ -730,11 +744,6 @@ Public Class frmFaultCal
                 listDG.SelectedItems(0).SubItems(9).Text = "->"
 
 
-
-
-
-
-
             End If
 
             createFaultGraph()
@@ -743,5 +752,90 @@ Public Class frmFaultCal
             MsgBox("Enter Numbers Only")
 
         End Try
+    End Sub
+
+    Private Sub listIIDG_SelectedIndexChanged(sender As Object, e As EventArgs) Handles listIIDG.SelectedIndexChanged
+
+        If listIIDG.SelectedItems.Count > 0 Then
+
+            txtIIDGConnectedNode.Text = listIIDG.SelectedItems(0).SubItems(1).Text
+
+            If listIIDG.SelectedItems(0).SubItems(5).Text = "Yes" Then
+
+                radbActivePowerYes.Checked = True
+
+            Else
+
+                radbActivePowerNo.Checked = False
+
+            End If
+
+            txtActivePwrOut.Text = listIIDG.SelectedItems(0).SubItems(2).Text
+            txtRatedCurnt.Text = listIIDG.SelectedItems(0).SubItems(3).Text
+            txtMaxCurnt.Text = listIIDG.SelectedItems(0).SubItems(4).Text
+
+        End If
+
+    End Sub
+
+    Private Sub btnIIDGUpdate_Click(sender As Object, e As EventArgs) Handles btnIIDGUpdate.Click
+
+        Try
+
+            If radbActivePowerYes.Checked Then
+
+                listIIDG.SelectedItems(0).SubItems(5).Text = "Yes"
+
+            ElseIf radbActivePowerNo.Checked Then
+
+                listIIDG.SelectedItems(0).SubItems(5).Text = "No"
+
+
+            End If
+
+            listIIDG.SelectedItems(0).SubItems(2).Text = Convert.ToDecimal(txtActivePwrOut.Text)
+            listIIDG.SelectedItems(0).SubItems(3).Text = Convert.ToDecimal(txtRatedCurnt.Text)
+            listIIDG.SelectedItems(0).SubItems(4).Text = Convert.ToDecimal(txtMaxCurnt.Text)
+
+        Catch ex As Exception
+
+            MsgBox("Enter Numbers Only")
+
+        End Try
+    End Sub
+
+    Private Sub listPreFaultVolt_SelectedIndexChanged(sender As Object, e As EventArgs) Handles listPreFaultVolt.SelectedIndexChanged
+
+        If listPreFaultVolt.SelectedItems.Count > 0 Then
+
+            txtBusPreFault.Text = listPreFaultVolt.SelectedItems(0).SubItems(1).Text
+
+            txtPhsARe.Text = listPreFaultVolt.SelectedItems(0).SubItems(2).Text
+            txtPhsAIm.Text = listPreFaultVolt.SelectedItems(0).SubItems(3).Text
+            txtPhsBRe.Text = listPreFaultVolt.SelectedItems(0).SubItems(4).Text
+            txtPhsBIm.Text = listPreFaultVolt.SelectedItems(0).SubItems(5).Text
+            txtPhsCRe.Text = listPreFaultVolt.SelectedItems(0).SubItems(6).Text
+            txtPhsCIm.Text = listPreFaultVolt.SelectedItems(0).SubItems(7).Text
+        End If
+
+    End Sub
+
+    Private Sub btnPreFaultVol_Click(sender As Object, e As EventArgs) Handles btnPreFaultVol.Click
+
+        Try
+
+            listPreFaultVolt.SelectedItems(0).SubItems(2).Text = Convert.ToDecimal(txtPhsARe.Text)
+            listPreFaultVolt.SelectedItems(0).SubItems(3).Text = Convert.ToDecimal(txtPhsAIm.Text)
+            listPreFaultVolt.SelectedItems(0).SubItems(4).Text = Convert.ToDecimal(txtPhsBRe.Text)
+            listPreFaultVolt.SelectedItems(0).SubItems(5).Text = Convert.ToDecimal(txtPhsBIm.Text)
+            listPreFaultVolt.SelectedItems(0).SubItems(6).Text = Convert.ToDecimal(txtPhsCRe.Text)
+            listPreFaultVolt.SelectedItems(0).SubItems(7).Text = Convert.ToDecimal(txtPhsCIm.Text)
+
+        Catch ex As Exception
+
+            MsgBox("Enter Numbers Only")
+
+        End Try
+
     End Sub
 End Class
