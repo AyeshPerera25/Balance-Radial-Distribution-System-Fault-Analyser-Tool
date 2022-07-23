@@ -22,7 +22,7 @@ Partial Class frmFaultCal
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.btnTFUpdate = New System.Windows.Forms.TabControl()
+        Me.tabCtrl = New System.Windows.Forms.TabControl()
         Me.tabLineImp = New System.Windows.Forms.TabPage()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.Label79 = New System.Windows.Forms.Label()
@@ -238,6 +238,7 @@ Partial Class frmFaultCal
         Me.Label37 = New System.Windows.Forms.Label()
         Me.Label62 = New System.Windows.Forms.Label()
         Me.tabFaultCalSet = New System.Windows.Forms.TabPage()
+        Me.Label86 = New System.Windows.Forms.Label()
         Me.GroupBox7 = New System.Windows.Forms.GroupBox()
         Me.panFaultViewer = New System.Windows.Forms.Panel()
         Me.faultViwer = New Microsoft.Glee.GraphViewerGdi.GViewer()
@@ -256,6 +257,7 @@ Partial Class frmFaultCal
         Me.Label25 = New System.Windows.Forms.Label()
         Me.Label26 = New System.Windows.Forms.Label()
         Me.Label17 = New System.Windows.Forms.Label()
+        Me.Label18 = New System.Windows.Forms.Label()
         Me.txtBaseVoltage = New System.Windows.Forms.TextBox()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.txtBasePower = New System.Windows.Forms.TextBox()
@@ -276,9 +278,11 @@ Partial Class frmFaultCal
         Me.btnSave = New System.Windows.Forms.Button()
         Me.lstFaultLog = New System.Windows.Forms.ListBox()
         Me.Label39 = New System.Windows.Forms.Label()
-        Me.Label18 = New System.Windows.Forms.Label()
-        Me.Label86 = New System.Windows.Forms.Label()
-        Me.btnTFUpdate.SuspendLayout()
+        Me.grpF2 = New System.Windows.Forms.GroupBox()
+        Me.pnlF2 = New System.Windows.Forms.Panel()
+        Me.faultViwer2 = New Microsoft.Glee.GraphViewerGdi.GViewer()
+        Me.txtResult = New System.Windows.Forms.TextBox()
+        Me.tabCtrl.SuspendLayout()
         Me.tabLineImp.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.tabTransform.SuspendLayout()
@@ -300,23 +304,26 @@ Partial Class frmFaultCal
         Me.GroupBox7.SuspendLayout()
         Me.panFaultViewer.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
+        Me.tabFaultOut.SuspendLayout()
+        Me.grpF2.SuspendLayout()
+        Me.pnlF2.SuspendLayout()
         Me.SuspendLayout()
         '
-        'btnTFUpdate
+        'tabCtrl
         '
-        Me.btnTFUpdate.Controls.Add(Me.tabLineImp)
-        Me.btnTFUpdate.Controls.Add(Me.tabTransform)
-        Me.btnTFUpdate.Controls.Add(Me.tabLoad)
-        Me.btnTFUpdate.Controls.Add(Me.tabDG)
-        Me.btnTFUpdate.Controls.Add(Me.tabIIDG)
-        Me.btnTFUpdate.Controls.Add(Me.tabPreFaultVolt)
-        Me.btnTFUpdate.Controls.Add(Me.tabFaultCalSet)
-        Me.btnTFUpdate.Controls.Add(Me.tabFaultOut)
-        Me.btnTFUpdate.Location = New System.Drawing.Point(12, 46)
-        Me.btnTFUpdate.Name = "btnTFUpdate"
-        Me.btnTFUpdate.SelectedIndex = 0
-        Me.btnTFUpdate.Size = New System.Drawing.Size(1020, 512)
-        Me.btnTFUpdate.TabIndex = 0
+        Me.tabCtrl.Controls.Add(Me.tabLineImp)
+        Me.tabCtrl.Controls.Add(Me.tabTransform)
+        Me.tabCtrl.Controls.Add(Me.tabLoad)
+        Me.tabCtrl.Controls.Add(Me.tabDG)
+        Me.tabCtrl.Controls.Add(Me.tabIIDG)
+        Me.tabCtrl.Controls.Add(Me.tabPreFaultVolt)
+        Me.tabCtrl.Controls.Add(Me.tabFaultCalSet)
+        Me.tabCtrl.Controls.Add(Me.tabFaultOut)
+        Me.tabCtrl.Location = New System.Drawing.Point(12, 46)
+        Me.tabCtrl.Name = "tabCtrl"
+        Me.tabCtrl.SelectedIndex = 0
+        Me.tabCtrl.Size = New System.Drawing.Size(1020, 512)
+        Me.tabCtrl.TabIndex = 0
         '
         'tabLineImp
         '
@@ -719,9 +726,9 @@ Partial Class frmFaultCal
         Me.rabYnYn.AutoSize = True
         Me.rabYnYn.Location = New System.Drawing.Point(167, 20)
         Me.rabYnYn.Name = "rabYnYn"
-        Me.rabYnYn.Size = New System.Drawing.Size(54, 22)
+        Me.rabYnYn.Size = New System.Drawing.Size(48, 22)
         Me.rabYnYn.TabIndex = 30
-        Me.rabYnYn.Text = "YnYn"
+        Me.rabYnYn.Text = "Yyn"
         Me.rabYnYn.UseVisualStyleBackColor = True
         '
         'rabYnD
@@ -729,9 +736,9 @@ Partial Class frmFaultCal
         Me.rabYnD.AutoSize = True
         Me.rabYnD.Location = New System.Drawing.Point(70, 20)
         Me.rabYnD.Name = "rabYnD"
-        Me.rabYnD.Size = New System.Drawing.Size(49, 22)
+        Me.rabYnD.Size = New System.Drawing.Size(50, 22)
         Me.rabYnD.TabIndex = 29
-        Me.rabYnD.Text = "YnD"
+        Me.rabYnD.Text = "Dyn"
         Me.rabYnD.UseVisualStyleBackColor = True
         '
         'Label48
@@ -2376,6 +2383,15 @@ Partial Class frmFaultCal
         Me.tabFaultCalSet.Text = "Calculation Settings"
         Me.tabFaultCalSet.UseVisualStyleBackColor = True
         '
+        'Label86
+        '
+        Me.Label86.AutoSize = True
+        Me.Label86.Location = New System.Drawing.Point(422, 183)
+        Me.Label86.Name = "Label86"
+        Me.Label86.Size = New System.Drawing.Size(22, 13)
+        Me.Label86.TabIndex = 122
+        Me.Label86.Text = "PU"
+        '
         'GroupBox7
         '
         Me.GroupBox7.Controls.Add(Me.panFaultViewer)
@@ -2403,7 +2419,7 @@ Partial Class frmFaultCal
         Me.faultViwer.BackwardEnabled = False
         Me.faultViwer.ForwardEnabled = False
         Me.faultViwer.Graph = Nothing
-        Me.faultViwer.Location = New System.Drawing.Point(4, 3)
+        Me.faultViwer.Location = New System.Drawing.Point(3, 3)
         Me.faultViwer.MouseHitDistance = 0.05R
         Me.faultViwer.Name = "faultViwer"
         Me.faultViwer.NavigationVisible = True
@@ -2563,6 +2579,15 @@ Partial Class frmFaultCal
         Me.Label17.TabIndex = 104
         Me.Label17.Text = "Fault Selection"
         '
+        'Label18
+        '
+        Me.Label18.AutoSize = True
+        Me.Label18.Location = New System.Drawing.Point(294, 409)
+        Me.Label18.Name = "Label18"
+        Me.Label18.Size = New System.Drawing.Size(14, 13)
+        Me.Label18.TabIndex = 103
+        Me.Label18.Text = "V"
+        '
         'txtBaseVoltage
         '
         Me.txtBaseVoltage.Location = New System.Drawing.Point(193, 406)
@@ -2690,6 +2715,8 @@ Partial Class frmFaultCal
         '
         'tabFaultOut
         '
+        Me.tabFaultOut.Controls.Add(Me.txtResult)
+        Me.tabFaultOut.Controls.Add(Me.grpF2)
         Me.tabFaultOut.Location = New System.Drawing.Point(4, 22)
         Me.tabFaultOut.Name = "tabFaultOut"
         Me.tabFaultOut.Padding = New System.Windows.Forms.Padding(3)
@@ -2743,23 +2770,53 @@ Partial Class frmFaultCal
         Me.Label39.TabIndex = 5
         Me.Label39.Text = "Fault Calculation Log"
         '
-        'Label18
+        'grpF2
         '
-        Me.Label18.AutoSize = True
-        Me.Label18.Location = New System.Drawing.Point(294, 409)
-        Me.Label18.Name = "Label18"
-        Me.Label18.Size = New System.Drawing.Size(14, 13)
-        Me.Label18.TabIndex = 103
-        Me.Label18.Text = "V"
+        Me.grpF2.Controls.Add(Me.pnlF2)
+        Me.grpF2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.grpF2.Location = New System.Drawing.Point(582, 3)
+        Me.grpF2.Name = "grpF2"
+        Me.grpF2.Size = New System.Drawing.Size(425, 475)
+        Me.grpF2.TabIndex = 122
+        Me.grpF2.TabStop = False
+        Me.grpF2.Text = "Network View"
         '
-        'Label86
+        'pnlF2
         '
-        Me.Label86.AutoSize = True
-        Me.Label86.Location = New System.Drawing.Point(422, 183)
-        Me.Label86.Name = "Label86"
-        Me.Label86.Size = New System.Drawing.Size(22, 13)
-        Me.Label86.TabIndex = 122
-        Me.Label86.Text = "PU"
+        Me.pnlF2.Controls.Add(Me.faultViwer2)
+        Me.pnlF2.Location = New System.Drawing.Point(3, 16)
+        Me.pnlF2.Name = "pnlF2"
+        Me.pnlF2.Size = New System.Drawing.Size(416, 453)
+        Me.pnlF2.TabIndex = 0
+        '
+        'faultViwer2
+        '
+        Me.faultViwer2.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.faultViwer2.AsyncLayout = False
+        Me.faultViwer2.AutoScroll = True
+        Me.faultViwer2.BackwardEnabled = False
+        Me.faultViwer2.ForwardEnabled = False
+        Me.faultViwer2.Graph = Nothing
+        Me.faultViwer2.Location = New System.Drawing.Point(3, 4)
+        Me.faultViwer2.MouseHitDistance = 0.05R
+        Me.faultViwer2.Name = "faultViwer2"
+        Me.faultViwer2.NavigationVisible = True
+        Me.faultViwer2.PanButtonPressed = False
+        Me.faultViwer2.SaveButtonVisible = True
+        Me.faultViwer2.Size = New System.Drawing.Size(410, 449)
+        Me.faultViwer2.TabIndex = 2
+        Me.faultViwer2.ZoomF = 1.0R
+        Me.faultViwer2.ZoomFraction = 0.5R
+        Me.faultViwer2.ZoomWindowThreshold = 0.05R
+        '
+        'txtResult
+        '
+        Me.txtResult.Location = New System.Drawing.Point(3, 6)
+        Me.txtResult.Multiline = True
+        Me.txtResult.Name = "txtResult"
+        Me.txtResult.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
+        Me.txtResult.Size = New System.Drawing.Size(576, 475)
+        Me.txtResult.TabIndex = 123
         '
         'frmFaultCal
         '
@@ -2771,11 +2828,11 @@ Partial Class frmFaultCal
         Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.btnReset)
         Me.Controls.Add(Me.btnCalFault)
-        Me.Controls.Add(Me.btnTFUpdate)
+        Me.Controls.Add(Me.tabCtrl)
         Me.Name = "frmFaultCal"
         Me.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show
         Me.Text = "Distribution Fault Analysis Software"
-        Me.btnTFUpdate.ResumeLayout(False)
+        Me.tabCtrl.ResumeLayout(False)
         Me.tabLineImp.ResumeLayout(False)
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
@@ -2811,12 +2868,16 @@ Partial Class frmFaultCal
         Me.panFaultViewer.ResumeLayout(False)
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
+        Me.tabFaultOut.ResumeLayout(False)
+        Me.tabFaultOut.PerformLayout()
+        Me.grpF2.ResumeLayout(False)
+        Me.pnlF2.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
 
-    Friend WithEvents btnTFUpdate As TabControl
+    Friend WithEvents tabCtrl As TabControl
     Friend WithEvents tabLineImp As TabPage
     Friend WithEvents tabDG As TabPage
     Friend WithEvents tabLoad As TabPage
@@ -3072,4 +3133,8 @@ Partial Class frmFaultCal
     Friend WithEvents Label62 As Label
     Friend WithEvents Label18 As Label
     Friend WithEvents Label86 As Label
+    Friend WithEvents txtResult As TextBox
+    Friend WithEvents grpF2 As GroupBox
+    Friend WithEvents pnlF2 As Panel
+    Friend WithEvents faultViwer2 As Microsoft.Glee.GraphViewerGdi.GViewer
 End Class

@@ -5,6 +5,8 @@ Imports Microsoft.Glee
 
 Public Class frmFaultCal
 
+    Public dataLog As String
+
     Public Property passNodeData As ListView
     Public Property passTransData As ListView
     Public Property passDGData As ListView
@@ -129,15 +131,18 @@ Public Class frmFaultCal
         Next
 
         faultViwer.Graph = graph
+        faultViwer2.Graph = graph
         Me.SuspendLayout()
         faultViwer.Dock = System.Windows.Forms.DockStyle.Fill
+        faultViwer2.Dock = System.Windows.Forms.DockStyle.Fill
         panFaultViewer.Controls.Add(faultViwer)
+        pnlF2.Controls.Add(faultViwer2)
         Me.ResumeLayout()
 
 
     End Sub
 
-    Private Sub calculateFaultNetwork()
+    Private Sub saveFaultNetwork()
         My.Computer.FileSystem.CopyFile("data2.xlsx", "script/dat2.xlsx", True)
         lstFaultLog.Items.Add("Excel File created in " + "script/dat2.xlsx")
         Dim fileInfo = New FileInfo("script/dat2.xlsx")
@@ -273,6 +278,39 @@ Public Class frmFaultCal
         End Using
 
 
+    End Sub
+
+    Private Sub calculateFaultNetwork()
+
+        tabCtrl.SelectedTab = tabFaultOut
+        dataLog = "----- FAULT CALCULATION START -----" + vbCrLf + vbCrLf
+        dataLog += "File: " + Project.filePath + vbCrLf + vbCrLf
+
+        lstFaultLog.Items.Add("Executing data file")
+        Dim proc As Process = New Process
+        proc.StartInfo.FileName = My.Settings.pythonPath
+        proc.StartInfo.Arguments = "script/FaultCal.py"
+        proc.StartInfo.UseShellExecute = False
+        proc.StartInfo.WindowStyle = ProcessWindowStyle.Hidden
+        proc.StartInfo.CreateNoWindow = True
+        proc.StartInfo.RedirectStandardOutput = True
+        proc.Start()
+        AddHandler proc.OutputDataReceived, AddressOf proccess_OutputDataReceived
+        proc.BeginOutputReadLine()
+        proc.WaitForExit()
+
+        txtResult.AppendText(dataLog)
+        txtResult.AppendText(vbCrLf + "----- CALCULATION COMPLETED -----" + vbCrLf + vbCrLf)
+        lstFaultLog.Items.Add("Execution completed")
+
+
+    End Sub
+
+    Public Sub proccess_OutputDataReceived(ByVal sender As Object, ByVal e As DataReceivedEventArgs)
+        ' On Error Resume Next
+        If e.Data <> "" Then
+            dataLog = dataLog + e.Data + vbCrLf
+        End If
     End Sub
 
     Private Sub listFaultImp_SelectedIndexChanged(sender As Object, e As EventArgs) Handles listFaultImp.SelectedIndexChanged
@@ -447,7 +485,7 @@ Public Class frmFaultCal
 
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
-        calculateFaultNetwork()
+        saveFaultNetwork()
 
     End Sub
 
@@ -457,12 +495,12 @@ Public Class frmFaultCal
             txtTFStart.Text = listTransformer.SelectedItems(0).SubItems(1).Text
             txtTFEnd.Text = listTransformer.SelectedItems(0).SubItems(2).Text
 
-            If listTransformer.SelectedItems(0).SubItems(11).Text = "YnD" Then
+            If listTransformer.SelectedItems(0).SubItems(11).Text = "Dyn" Then
 
                 rabYnD.Checked = True
                 rabYnYn.Checked = False
 
-            ElseIf listTransformer.SelectedItems(0).SubItems(11).Text = "YnYn" Then
+            ElseIf listTransformer.SelectedItems(0).SubItems(11).Text = "Yyn" Then
 
                 rabYnD.Checked = False
                 rabYnYn.Checked = True
@@ -498,15 +536,15 @@ Public Class frmFaultCal
             listTransformer.SelectedItems(0).SubItems(10).Text = Convert.ToDecimal(txtTFGndIM.Text)
 
             If rabYnD.Checked = True And rabYnYn.Checked = False Then
-                listTransformer.SelectedItems(0).SubItems(11).Text = "YnD"
+                listTransformer.SelectedItems(0).SubItems(11).Text = "Dyn"
 
             ElseIf rabYnD.Checked = False And rabYnYn.Checked = True Then
 
-                listTransformer.SelectedItems(0).SubItems(11).Text = "YnYn"
+                listTransformer.SelectedItems(0).SubItems(11).Text = "Yyn"
 
             Else
                 MsgBox("Enter Transformer Type or It get setted to YnD")
-                listTransformer.SelectedItems(0).SubItems(11).Text = "YnD"
+                listTransformer.SelectedItems(0).SubItems(11).Text = "Dyn"
 
             End If
 
@@ -803,7 +841,7 @@ Public Class frmFaultCal
 
             ElseIf radbTurnIIDG.Checked And listDG.SelectedItems(0).SubItems(10).Text = "DG" Then
 
-                    Dim IIDGCount As Integer = listIIDG.Items.Count
+                Dim IIDGCount As Integer = listIIDG.Items.Count
 
                 listIIDG.Items.Add(Convert.ToString(IIDGCount + 1), IIDGCount)
                 listIIDG.Items(IIDGCount).SubItems.Add(Convert.ToString(txtDGConnctNode.Text))
@@ -918,5 +956,13 @@ Public Class frmFaultCal
 
     End Sub
 
+    Private Sub btnCalFault_Click(sender As Object, e As EventArgs) Handles btnCalFault.Click
+        saveFaultNetwork()
+        calculateFaultNetwork()
 
+    End Sub
+
+    Private Sub rabYnYn_CheckedChanged(sender As Object, e As EventArgs) Handles rabYnYn.CheckedChanged
+
+    End Sub
 End Class
